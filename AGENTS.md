@@ -54,7 +54,7 @@ Maintenance guide for AI agents working on this project.
 - `frontendAssociations` records semantic matches even when frontend wording differs.
 - `displayedPrice` records the legacy price currently hardcoded on the referenced page; it is not the authoritative new price.
 - `needsClientConfirmation: true` marks data inferred from the old frontend rather than supplied in the original service list.
-- Current inventory: 3 categories and 11 treatments.
+- Current inventory: 2 categories and 8 treatments.
 - Important limitation: the HTML pages do not yet fetch or render `configuration.json`. Editing the JSON alone will not update the visible site until runtime rendering is implemented.
 - The Salonized booking catalog is external and is not controlled by `configuration.json`.
 
