@@ -63,14 +63,14 @@
               "page": "services.html",
               "label": "Men Haircut",
               "relation": "equivalent",
-              "displayedPrice": 25.0,
+              "displayedPrice": 28.50,
               "displayedPriceType": "exact"
             },
             {
               "page": "index.html",
               "label": "Knipbeurt",
               "relation": "featured-equivalent",
-              "displayedPrice": 25.0,
+              "displayedPrice": 28.5,
               "displayedPriceType": "from",
               "displayedPriceNote": "incl. finish"
             }
@@ -86,14 +86,14 @@
               "page": "services.html",
               "label": "Men Hair & Beard Cut",
               "relation": "equivalent",
-              "displayedPrice": 40.0,
+              "displayedPrice": 43.50,
               "displayedPriceType": "exact"
             },
             {
               "page": "index.html",
               "label": "Knipbeurt + Baard",
               "relation": "featured-equivalent",
-              "displayedPrice": 40.0,
+              "displayedPrice": 43.50,
               "displayedPriceType": "from",
               "displayedPriceNote": "combi deal"
             }
@@ -109,7 +109,7 @@
               "page": "services.html",
               "label": "Men Hair & Beard Trim (1 Length)",
               "relation": "equivalent",
-              "displayedPrice": 35.0,
+              "displayedPrice": 38.50,
               "displayedPriceType": "exact"
             }
           ]
@@ -122,9 +122,9 @@
           "frontendAssociations": [
             {
               "page": "services.html",
-              "label": "Men Head Shave (Clipper Only)",
+              "label": "Men Head Shave (Clipper only max 2 lengths)",
               "relation": "probable-equivalent",
-              "displayedPrice": 20.0,
+              "displayedPrice": 22.50,
               "displayedPriceType": "exact",
               "note": "Both describe a clipper-only treatment, but the wording should be confirmed with the client."
             }
@@ -140,7 +140,7 @@
               "page": "services.html",
               "label": "Men Contour",
               "relation": "equivalent",
-              "displayedPrice": 10.0,
+              "displayedPrice": 11.0,
               "displayedPriceType": "exact"
             }
           ]
@@ -160,7 +160,7 @@
           "page": "index.html",
           "label": "Baard Trim & Styling",
           "relation": "featured-category-summary",
-          "displayedPrice": 20.0,
+          "displayedPrice": 22.5,
           "displayedPriceType": "from",
           "displayedPriceNote": "incl. product"
         }
@@ -176,7 +176,7 @@
               "page": "services.html",
               "label": "Beard",
               "relation": "equivalent",
-              "displayedPrice": 20.0,
+              "displayedPrice": 22.50,
               "displayedPriceType": "exact"
             }
           ]
@@ -191,7 +191,7 @@
               "page": "services.html",
               "label": "Beard Trim (1 Length)",
               "relation": "equivalent",
-              "displayedPrice": 12.5,
+              "displayedPrice": 17.50,
               "displayedPriceType": "exact"
             }
           ]
@@ -208,7 +208,7 @@
               "page": "services.html",
               "label": "Beard Contour",
               "relation": "equivalent",
-              "displayedPrice": 7.5,
+              "displayedPrice": 9.50,
               "displayedPriceType": "exact"
             }
           ]

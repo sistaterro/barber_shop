@@ -512,32 +512,32 @@ footer::before {
         <div class="cat-header">
           <div class="cat-eyebrow">01</div>
           <div class="cat-title-wrap">
-            <h2 class="cat-title">Haircut</h2>
+            <h2 class="cat-title" data-category-id="haircuts">Haircut</h2>
           </div>
         </div>
 
         <div class="price-list">
-          <div class="price-row">
+          <div class="price-row" data-service-id="mens-haircut">
             <span class="price-name">Men Haircut</span>
             <span class="price-dots"></span>
             <span class="price-amount">€ 25,-</span>
           </div>
-          <div class="price-row">
+          <div class="price-row" data-service-id="tondeuse-max-two-lengths">
             <span class="price-name">Men Head Shave <small style="font-size:14px;color:var(--text3);letter-spacing:1px;">(Clipper Only)</small></span>
             <span class="price-dots"></span>
             <span class="price-amount">€ 20,-</span>
           </div>
-          <div class="price-row">
+          <div class="price-row" data-service-id="mens-hair-and-beardtrim">
             <span class="price-name">Men Hair &amp; Beard Cut</span>
             <span class="price-dots"></span>
             <span class="price-amount">€ 40,-</span>
           </div>
-          <div class="price-row">
+          <div class="price-row" data-service-id="mens-hair-and-beardtrim-short-one-length">
             <span class="price-name">Men Hair &amp; Beard Trim <small style="font-size:14px;color:var(--text3);letter-spacing:1px;">(1 Length)</small></span>
             <span class="price-dots"></span>
             <span class="price-amount">€ 35,-</span>
           </div>
-          <div class="price-row">
+          <div class="price-row" data-service-id="mens-contour-only">
             <span class="price-name">Men Contour</span>
             <span class="price-dots"></span>
             <span class="price-amount">€ 10,-</span>
@@ -576,22 +576,22 @@ footer::before {
         <div class="cat-header">
           <div class="cat-eyebrow">02</div>
           <div class="cat-title-wrap">
-            <h2 class="cat-title">Beard</h2>
+            <h2 class="cat-title" data-category-id="beardtrim">Beard</h2>
           </div>
         </div>
 
         <div class="price-list">
-          <div class="price-row">
+          <div class="price-row" data-service-id="beardtrim-standard">
             <span class="price-name">Beard</span>
             <span class="price-dots"></span>
             <span class="price-amount">€ 20,-</span>
           </div>
-          <div class="price-row">
+          <div class="price-row" data-service-id="beardtrim-one-length-and-contours">
             <span class="price-name">Beard Trim <small style="font-size:14px;color:var(--text3);letter-spacing:1px;">(1 Length)</small></span>
             <span class="price-dots"></span>
             <span class="price-amount">€ 12,50</span>
           </div>
-          <div class="price-row">
+          <div class="price-row" data-service-id="beard-contour-line-up">
             <span class="price-name">Beard Contour</span>
             <span class="price-dots"></span>
             <span class="price-amount">€ 7,50</span>
@@ -688,6 +688,7 @@ footer::before {
   </div>
 </footer>
 
+<script src="assets/configuration.js"></script>
 <script>
 // ── NAV scroll darkening
 const nav = document.getElementById('main-nav');

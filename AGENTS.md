@@ -52,10 +52,13 @@ Maintenance guide for AI agents working on this project.
 - `price` is the intended current/source price in EUR.
 - `priceType` can distinguish values such as `exact`, `from`, or `included`.
 - `frontendAssociations` records semantic matches even when frontend wording differs.
-- `displayedPrice` records the legacy price currently hardcoded on the referenced page; it is not the authoritative new price.
+- Each association `label` is authoritative for its referenced page and overrides the static HTML fallback.
+- `displayedPrice` is the page-specific price rendered for the referenced frontend association.
+- `price` is the base treatment price and is used when an association has no `displayedPrice` override.
 - `needsClientConfirmation: true` marks data inferred from the old frontend rather than supplied in the original service list.
 - Current inventory: 2 categories and 8 treatments.
-- Important limitation: the HTML pages do not yet fetch or render `configuration.json`. Editing the JSON alone will not update the visible site until runtime rendering is implemented.
+- `index.html` and `services.html` load service labels and prices from `configuration.json` through `assets/configuration.js`.
+- Static HTML prices remain as a fallback if the JSON request fails.
 - The Salonized booking catalog is external and is not controlled by `configuration.json`.
 
 ## 5) Current business hours (source of truth)
@@ -92,12 +95,13 @@ Maintenance guide for AI agents working on this project.
   - Main hero includes `assets/main logo.png`.
   - Welkom image is `assets/barber2.jpg`.
   - Uses `scrollTo_` for internal anchor scrolling.
-  - Featured service cards and prices are currently hardcoded.
+  - Featured cards use stable `data-service-id` values and render associated labels and prices from `configuration.json`.
 - `history.html`
   - Contains historical content and CTA blocks.
 - `services.html`
-  - Full price lists are currently hardcoded.
-  - Semantic equivalents and legacy displayed prices are documented in `configuration.json`.
+  - Price rows use stable `data-service-id` values and render associated labels and prices from `configuration.json`.
+  - Category titles use `data-category-id` and render their association labels from `configuration.json`.
+  - Semantic equivalents and page-specific prices are documented in `configuration.json`.
 - `booking/index.html`
   - Canonical URL is `/booking/`.
   - Contains contact details, business hours, Salonized booking widget, and map.
@@ -140,8 +144,9 @@ Maintenance guide for AI agents working on this project.
 - Avoid large copy rewrites unless requested.
 - If nav, footer, icons, or links change, replicate the change across all pages.
 - Preserve `booking.html` compatibility and the canonical `/booking/` route.
-- Do not treat `displayedPrice` as the authoritative service price.
-- Do not assume that changing `configuration.json` updates the live HTML until the renderer exists.
+- Use `displayedPrice` for page-specific presentation and `price` as its base fallback.
+- Preserve `data-service-id` bindings and `assets/configuration.js` when editing service markup.
+- Preserve `data-category-id` bindings on configurable category titles.
 - Decision priority:
   1. Correct navigation and QR compatibility
   2. Correct business data
