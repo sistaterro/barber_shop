@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "currency": "EUR",
+  "categories": [
+    {
+      "id": "haircuts",
+      "name": "Haircuts",
+      "frontendAssociations": [
+        {
+          "page": "services.html",
+          "label": "Haircut",
+          "relation": "category-equivalent"
+        }
+      ],
+      "treatments": [
+        {
+          "id": "mens-haircut",
+          "name": "Men's Haircut",
+          "durationMinutes": 30,
+          "price": 28.5,
+          "frontendAssociations": [
+            {
+              "page": "services.html",
+              "label": "Men Haircut",
+              "relation": "equivalent",
+              "displayedPrice": 25.0,
+              "displayedPriceType": "exact"
+            },
+            {
+              "page": "index.html",
+              "label": "Knipbeurt",
+              "relation": "featured-equivalent",
+              "displayedPrice": 25.0,
+              "displayedPriceType": "from",
+              "displayedPriceNote": "incl. finish"
+            }
+          ]
+        },
+        {
+          "id": "mens-hair-and-beardtrim",
+          "name": "Men's Hair & Beardtrim",
+          "durationMinutes": 30,
+          "price": 43.5,
+          "frontendAssociations": [
+            {
+              "page": "services.html",
+              "label": "Men Hair & Beard Cut",
+              "relation": "equivalent",
+              "displayedPrice": 40.0,
+              "displayedPriceType": "exact"
+            },
+            {
+              "page": "index.html",
+              "label": "Knipbeurt + Baard",
+              "relation": "featured-equivalent",
+              "displayedPrice": 40.0,
+              "displayedPriceType": "from",
+              "displayedPriceNote": "combi deal"
+            }
+          ]
+        },
+        {
+          "id": "mens-hair-and-beardtrim-short-one-length",
+          "name": "Men's Hair & Beardtrim (short 1 length)",
+          "durationMinutes": 30,
+          "price": 38.5,
+          "frontendAssociations": [
+            {
+              "page": "services.html",
+              "label": "Men Hair & Beard Trim (1 Length)",
+              "relation": "equivalent",
+              "displayedPrice": 35.0,
+              "displayedPriceType": "exact"
+            }
+          ]
+        },
+        {
+          "id": "tondeuse-max-two-lengths",
+          "name": "Tondeuse (Max 2 Lengths)",
+          "durationMinutes": 15,
+          "price": 22.5,
+          "frontendAssociations": [
+            {
+              "page": "services.html",
+              "label": "Men Head Shave (Clipper Only)",
+              "relation": "probable-equivalent",
+              "displayedPrice": 20.0,
+              "displayedPriceType": "exact",
+              "note": "Both describe a clipper-only treatment, but the wording should be confirmed with the client."
+            }
+          ]
+        },
+        {
+          "id": "mens-contour-only",
+          "name": "Men's Contour only",
+          "durationMinutes": 10,
+          "price": 11.0,
+          "frontendAssociations": [
+            {
+              "page": "services.html",
+              "label": "Men Contour",
+              "relation": "equivalent",
+              "displayedPrice": 10.0,
+              "displayedPriceType": "exact"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beardtrim",
+      "name": "Beardtrim",
+      "frontendAssociations": [
+        {
+          "page": "services.html",
+          "label": "Beard",
+          "relation": "category-equivalent"
+        },
+        {
+          "page": "index.html",
+          "label": "Baard Trim & Styling",
+          "relation": "featured-category-summary",
+          "displayedPrice": 20.0,
+          "displayedPriceType": "from",
+          "displayedPriceNote": "incl. product"
+        }
+      ],
+      "treatments": [
+        {
+          "id": "beardtrim-standard",
+          "name": "Beardtrim",
+          "durationMinutes": 25,
+          "price": 22.5,
+          "frontendAssociations": [
+            {
+              "page": "services.html",
+              "label": "Beard",
+              "relation": "equivalent",
+              "displayedPrice": 20.0,
+              "displayedPriceType": "exact"
+            }
+          ]
+        },
+        {
+          "id": "beardtrim-one-length-and-contours",
+          "name": "Beardtrim (Max 1 length + Contours)",
+          "durationMinutes": 15,
+          "price": 17.5,
+          "frontendAssociations": [
+            {
+              "page": "services.html",
+              "label": "Beard Trim (1 Length)",
+              "relation": "equivalent",
+              "displayedPrice": 12.5,
+              "displayedPriceType": "exact"
+            }
+          ]
+        },
+        {
+          "id": "beard-contour-line-up",
+          "name": "Beard Contour (Line up)",
+          "durationMinutes": null,
+          "price": 7.5,
+          "priceType": "exact",
+          "needsClientConfirmation": true,
+          "frontendAssociations": [
+            {
+              "page": "services.html",
+              "label": "Beard Contour",
+              "relation": "equivalent",
+              "displayedPrice": 7.5,
+              "displayedPriceType": "exact"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "additional-services",
+      "name": "Additional Services",
+      "frontendAssociations": [
+        {
+          "page": "index.html",
+          "label": "Additional homepage services",
+          "relation": "category-container"
+        }
+      ],
+      "treatments": [
+        {
+          "id": "hot-towel-shave",
+          "name": "Hot Towel Shave",
+          "durationMinutes": null,
+          "price": 30.0,
+          "priceType": "from",
+          "priceNote": "incl. towel",
+          "frontendAssociations": [
+            {
+              "page": "index.html",
+              "label": "Hot Towel Shave",
+              "relation": "equivalent",
+              "displayedPrice": 30.0,
+              "displayedPriceType": "from",
+              "displayedPriceNote": "incl. towel"
+            }
+          ]
+        },
+        {
+          "id": "childrens-haircut",
+          "name": "Children's Haircut",
+          "durationMinutes": null,
+          "price": 15.0,
+          "priceType": "from",
+          "priceNote": "Up to and including 12 years old",
+          "frontendAssociations": [
+            {
+              "page": "index.html",
+              "label": "Kinderen",
+              "relation": "equivalent",
+              "displayedPrice": 15.0,
+              "displayedPriceType": "from",
+              "displayedPriceNote": "t/m 12 jaar"
+            }
+          ]
+        },
+        {
+          "id": "coffee-and-relaxation",
+          "name": "Coffee & Relaxation",
+          "durationMinutes": null,
+          "price": 0.0,
+          "priceType": "included",
+          "priceNote": "Free with every treatment",
+          "frontendAssociations": [
+            {
+              "page": "index.html",
+              "label": "Koffie & Ontspanning",
+              "relation": "equivalent",
+              "displayedPrice": 0.0,
+              "displayedPriceType": "included",
+              "displayedPriceNote": "bij elke behandeling"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
