@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>History — Lighttown Barbershop</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --black:    #080603;
+  --dark:     #100d08;
+  --dark2:    #1a1510;
+  --dark3:    #241e16;
+  --gold:     #c8963c;
+  --gold2:    #e8b86e;
+  --gold3:    #f5d090;
+  --gold-dim: rgba(200,150,60,0.15);
+  --cream:    #f0e8d4;
+  --cream2:   #d8cbb0;
+  --text:     #ede4d0;
+  --text2:    #e0d1b6;
+  --text3:    #c0ab89;
+  --border:   rgba(200,150,60,0.2);
+  --border2:  rgba(200,150,60,0.4);
+  --serif-display: 'Cinzel Decorative', serif;
+  --serif-title:   'Cinzel', serif;
+  --serif-body:    'EB Garamond', Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--serif-body);
+  font-size: 18px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 256px;
+}
+
+/* ── ORNAMENT ── */
+.ornament {
+  display: flex; align-items: center; justify-content: center;
+  gap: 14px; color: var(--gold); opacity: 0.7; margin: 0 auto; width: 100%;
+}
+.ornament::before { content:''; flex:1; max-width:200px; height:1px; background:linear-gradient(to right, transparent, var(--gold)); }
+.ornament::after  { content:''; flex:1; max-width:200px; height:1px; background:linear-gradient(to left,  transparent, var(--gold)); }
+.ornament-symbol  { font-size:18px; letter-spacing:6px; color:var(--gold); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:500;
+  height: 72px; display:flex; align-items:center; justify-content:space-between;
+  padding: 0 56px;
+  background: rgba(8,6,3,0.82);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border); transition: background 0.3s;
+}
+nav::after {
+  content:''; position:absolute; bottom:0; left:10%; right:10%; height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent); opacity:0.5;
+}
+.nav-logo img {
+  height:68px; width:auto;
+  filter: drop-shadow(0 2px 8px rgba(200,150,60,0.3)); transition: filter 0.3s;
+}
+.nav-logo img:hover { filter: drop-shadow(0 2px 16px rgba(200,150,60,0.6)); }
+.nav-links { display:flex; gap:40px; list-style:none; }
+.nav-links a {
+  font-family:var(--serif-title); font-size:14px; font-weight:500;
+  letter-spacing:3px; text-transform:uppercase; color:var(--text2);
+  text-decoration:none; transition:color 0.2s; position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-4px; left:50%; transform:translateX(-50%);
+  width:0; height:1px; background:var(--gold); transition:width 0.25s ease;
+}
+.nav-links a:hover, .nav-links a.active { color:var(--gold2); }
+.nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+.nav-cta {
+  font-family:var(--serif-title); font-size:12px; font-weight:600;
+  letter-spacing:3px; text-transform:uppercase; color:var(--black);
+  background:linear-gradient(135deg, var(--gold), var(--gold2));
+  padding:10px 24px; text-decoration:none;
+  clip-path:polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  transition:filter 0.2s, transform 0.15s;
+  box-shadow: 0 2px 14px rgba(200,150,60,0.4);
+}
+.nav-cta:hover { filter:brightness(1.15); transform:translateY(-1px); }
+
+/* ── BUTTONS ── */
+.btn-gold {
+  font-family:var(--serif-title); font-size:12px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--black);
+  background:linear-gradient(135deg, var(--gold), var(--gold2));
+  padding:14px 32px; text-decoration:none; display:inline-block;
+  clip-path:polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  box-shadow:0 4px 24px rgba(200,150,60,0.5);
+  transition:filter 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.btn-gold:hover { filter:brightness(1.1); transform:translateY(-2px); box-shadow:0 8px 36px rgba(200,150,60,0.6); }
+
+.btn-outline-gold {
+  font-family:var(--serif-title); font-size:12px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--gold2); background:transparent;
+  padding:13px 30px; text-decoration:none; display:inline-block;
+  border:1px solid rgba(200,150,60,0.5);
+  clip-path:polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  transition:background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.btn-outline-gold:hover { background:rgba(200,150,60,0.1); border-color:var(--gold); transform:translateY(-2px); }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  position:relative; height:80vh; min-height:560px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; overflow:hidden;
+}
+.page-hero-bg {
+  position:absolute; inset:0;
+  background-image: url('assets/history2.jpg');
+  background-size:cover; background-position:center 40%;
+  filter:brightness(0.28) sepia(0.32) contrast(1.08);
+  transform:scale(1.08); transition:transform 1s ease;
+}
+.page-hero-bg.loaded { transform:scale(1.04); }
+.page-hero-overlay {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to bottom,
+      rgba(8,6,3,0.62) 0%,
+      rgba(8,6,3,0.16) 35%,
+      rgba(8,6,3,0.16) 65%,
+      rgba(8,6,3,0.95) 100%);
+}
+.page-hero-content {
+  position:relative; z-index:10;
+  display:flex; flex-direction:column; align-items:center; gap:16px;
+  padding:0 32px;
+  animation: pageReveal 1s ease both;
+}
+@keyframes pageReveal {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.page-hero-eyebrow {
+  font-family:var(--serif-title); font-size:12px;
+  letter-spacing:6px; text-transform:uppercase; color:var(--gold);
+}
+.page-hero-title {
+  font-family:var(--serif-display);
+  font-size:clamp(52px, 10vw, 110px);
+  font-weight:700; line-height:0.95; letter-spacing:2px;
+  color:var(--cream);
+  text-shadow:0 6px 44px rgba(0,0,0,0.92), 0 0 90px rgba(200,150,60,0.14);
+}
+.page-hero-sub {
+  font-family:var(--serif-title); font-size:13px;
+  letter-spacing:5px; text-transform:uppercase; color:var(--text3);
+  margin-top:8px;
+}
+.page-hero-line {
+  position:absolute; bottom:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(200,150,60,0.45), transparent);
+}
+
+/* ── SECTION DIVIDER ── */
+.section-divider {
+  position:relative; z-index:10; padding:32px 56px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--dark);
+  border-top:1px solid rgba(200,150,60,0.08);
+  border-bottom:1px solid rgba(200,150,60,0.08);
+}
+
+/* ── SHARED SECTION STYLES ── */
+.section-eyebrow {
+  font-family:var(--serif-title); font-size:12px; letter-spacing:5px;
+  text-transform:uppercase; color:var(--gold);
+  display:flex; align-items:center; gap:12px; margin-bottom:18px;
+}
+.section-eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--gold); }
+
+.section-eyebrow-center {
+  font-family:var(--serif-title); font-size:12px; letter-spacing:5px;
+  text-transform:uppercase; color:var(--gold);
+  display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:18px;
+}
+.section-eyebrow-center::before,
+.section-eyebrow-center::after { content:''; display:block; width:28px; height:1px; background:var(--gold); opacity:0.6; }
+
+.img-corner { position:absolute; width:20px; height:20px; z-index:3; border-color:var(--gold); border-style:solid; opacity:0.6; }
+.img-corner.tl { top:3px;  left:3px;  border-width:2px 0 0 2px; }
+.img-corner.tr { top:3px;  right:3px; border-width:2px 2px 0 0; }
+.img-corner.bl { bottom:3px; left:3px;  border-width:0 0 2px 2px; }
+.img-corner.br { bottom:3px; right:3px; border-width:0 2px 2px 0; }
+
+.framed-img {
+  position:relative; border:1px solid rgba(200,150,60,0.25);
+  padding:10px; background:var(--dark2);
+}
+.framed-img::before {
+  content:''; position:absolute; inset:3px;
+  border:1px solid rgba(200,150,60,0.1); pointer-events:none; z-index:2;
+}
+.framed-img img {
+  width:100%; object-fit:cover; display:block;
+  filter:sepia(0.15) contrast(1.05); transition:filter 0.4s;
+}
+.framed-img:hover img { filter:sepia(0) contrast(1); }
+
+/* ═══════════════════════════════════════════════
+   INTRO — De barbier
+═══════════════════════════════════════════════ */
+.intro {
+  position:relative; z-index:10;
+  background:var(--dark); padding:100px 56px; overflow:hidden;
+}
+.intro::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 70% 60% at 80% 50%, rgba(200,150,60,0.04), transparent);
+  pointer-events:none;
+}
+.intro-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; max-width:1200px; margin:0 auto; align-items:center;
+}
+.history-title {
+  font-family:var(--serif-title);
+  font-size:clamp(24px, 3.2vw, 38px); font-weight:600;
+  line-height:1.25; letter-spacing:-0.2px; color:var(--cream); margin-bottom:28px;
+}
+.history-title em { font-style:italic; color:var(--gold2); }
+
+.history-body {
+  font-family:var(--serif-body); font-size:17px;
+  color:var(--text2); line-height:1.9; margin-bottom:18px;
+}
+.history-body strong { color:var(--text); font-weight:500; }
+
+/* ═══════════════════════════════════════════════
+   PULL QUOTE
+═══════════════════════════════════════════════ */
+.pull-quote-section {
+  position:relative; z-index:10;
+  background:var(--dark2); padding:80px 56px;
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  overflow:hidden;
+}
+.pull-quote-section::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 50%, rgba(200,150,60,0.05), transparent);
+  pointer-events:none;
+}
+.pull-quote {
+  max-width:800px; margin:0 auto; text-align:center; position:relative;
+}
+.pq-mark {
+  font-family:var(--serif-display); font-size:80px; line-height:0.6;
+  color:var(--gold); opacity:0.2; display:block; margin-bottom:20px;
+}
+.pq-text {
+  font-family:var(--serif-body); font-size:clamp(20px, 2.5vw, 28px);
+  font-style:italic; color:var(--cream2); line-height:1.55; margin-bottom:20px;
+}
+.pq-source {
+  font-family:var(--serif-title); font-size:12px; letter-spacing:4px;
+  text-transform:uppercase; color:var(--gold); opacity:0.7;
+}
+
+/* ═══════════════════════════════════════════════
+   MIDDELEEUWEN — reversed grid
+═══════════════════════════════════════════════ */
+.middle-ages {
+  position:relative; z-index:10;
+  background:var(--black); padding:100px 56px; overflow:hidden;
+}
+.middle-ages::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 60% 40% at 20% 60%, rgba(200,150,60,0.03), transparent);
+  pointer-events:none;
+}
+.middle-ages-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; max-width:1200px; margin:0 auto; align-items:center;
+}
+
+/* ═══════════════════════════════════════════════
+   BARBER POLE — full-width dark band
+═══════════════════════════════════════════════ */
+.pole-band {
+  position:relative; z-index:10;
+  background:var(--dark2);
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  padding:80px 56px; overflow:hidden;
+}
+.pole-band-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; max-width:1200px; margin:0 auto; align-items:center;
+}
+.pole-visual {
+  position:relative;
+}
+.pole-img-wrap {
+  position:relative;
+  border:1px solid rgba(200,150,60,0.25); padding:10px; background:var(--dark3);
+}
+.pole-img-wrap::before {
+  content:''; position:absolute; inset:3px;
+  border:1px solid rgba(200,150,60,0.1); pointer-events:none; z-index:2;
+}
+.pole-img-wrap img {
+  width:100%; aspect-ratio:3/4; object-fit:cover; display:block;
+  filter:sepia(0.1) contrast(1.05); transition:filter 0.4s;
+}
+.pole-img-wrap:hover img { filter:sepia(0) contrast(1); }
+
+/* ═══════════════════════════════════════════════
+   TIMELINE
+═══════════════════════════════════════════════ */
+.timeline-section {
+  position:relative; z-index:10;
+  background:var(--dark); padding:100px 56px;
+}
+.timeline-header {
+  text-align:center; max-width:600px; margin:0 auto 64px;
+}
+.timeline-title {
+  font-family:var(--serif-title);
+  font-size:clamp(22px, 3vw, 36px); font-weight:600;
+  color:var(--cream); letter-spacing:-0.2px;
+}
+.timeline-title em { font-style:italic; color:var(--gold2); }
+
+.timeline {
+  position:relative; max-width:900px; margin:0 auto;
+}
+/* Vertical line */
+.timeline::before {
+  content:''; position:absolute;
+  left:50%; top:0; bottom:0; width:1px;
+  background:linear-gradient(to bottom, transparent, var(--gold), var(--gold), transparent);
+  opacity:0.3; transform:translateX(-50%);
+}
+
+.tl-item {
+  display:grid; grid-template-columns:1fr 60px 1fr;
+  gap:0; align-items:start; margin-bottom:56px; position:relative;
+}
+.tl-item:last-child { margin-bottom:0; }
+
+.tl-text-left { text-align:right; padding-right:40px; padding-top:8px; }
+.tl-text-right { text-align:left;  padding-left:40px;  padding-top:8px; }
+.tl-text-empty { }
+
+.tl-node {
+  display:flex; align-items:flex-start; justify-content:center; padding-top:6px;
+}
+.tl-dot {
+  width:14px; height:14px; border-radius:50%;
+  background:var(--dark); border:2px solid var(--gold);
+  box-shadow:0 0 0 4px rgba(200,150,60,0.15);
+  flex-shrink:0; position:relative; z-index:1;
+  transition:box-shadow 0.3s;
+}
+.tl-item:hover .tl-dot { box-shadow:0 0 0 8px rgba(200,150,60,0.2); }
+
+.tl-year {
+  font-family:var(--serif-title); font-size:13px; font-weight:600;
+  letter-spacing:3px; text-transform:uppercase; color:var(--gold);
+  margin-bottom:6px; display:block;
+}
+.tl-heading {
+  font-family:var(--serif-title); font-size:15px; font-weight:600;
+  color:var(--cream); margin-bottom:8px; letter-spacing:0.3px;
+}
+.tl-desc {
+  font-family:var(--serif-body); font-size:15px;
+  color:var(--text3); line-height:1.7;
+}
+
+/* ═══════════════════════════════════════════════
+   TODAY — Lighttown's place in history
+═══════════════════════════════════════════════ */
+.today-section {
+  position:relative; z-index:10;
+  background:var(--black); padding:100px 56px; overflow:hidden;
+}
+.today-section::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 50%, rgba(200,150,60,0.04), transparent);
+  pointer-events:none;
+}
+.today-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; max-width:1200px; margin:0 auto; align-items:center;
+}
+.today-cta-box {
+  background:var(--dark3);
+  border:1px solid var(--border2); padding:40px;
+  position:relative; text-align:center; margin-top:32px;
+}
+.today-cta-box::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.today-cta-title {
+  font-family:var(--serif-title); font-size:16px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--gold2); margin-bottom:12px;
+}
+.today-cta-sub {
+  font-family:var(--serif-body); font-size:15px; font-style:italic;
+  color:var(--text3); margin-bottom:24px;
+}
+.today-cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+/* ═══════════════════════════════════════════════
+   FOOTER — identiek aan home
+═══════════════════════════════════════════════ */
+footer {
+  position:relative; z-index:10;
+  background:var(--black); border-top:1px solid var(--border);
+  padding:64px 56px 36px;
+}
+footer::before {
+  content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent); opacity:0.3;
+}
+.footer-grid {
+  display:grid; grid-template-columns:1.4fr 1fr 1fr 0.8fr;
+  gap:48px; max-width:1200px; margin:0 auto 48px;
+}
+.footer-brand img {
+  height:96px; width:auto;
+  filter:drop-shadow(0 2px 8px rgba(200,150,60,0.2)); margin-bottom:16px;
+}
+.footer-tagline {
+  font-family:var(--serif-body); font-size:18px; font-style:italic;
+  color:var(--text3); line-height:1.7; max-width:220px;
+}
+.footer-col h4 {
+  font-family:var(--serif-title); font-size:16px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--gold);
+  margin-bottom:18px; padding-bottom:10px; border-bottom:1px solid var(--border);
+}
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.footer-col ul li a {
+  font-family:var(--serif-body); font-size:17px;
+  color:var(--text3); text-decoration:none; transition:color 0.2s;
+}
+.footer-col ul li a:hover { color:var(--gold2); }
+.footer-contact p {
+  font-family:var(--serif-body); font-size:19px; color:var(--text3); line-height:1.8;
+}
+.footer-social { display:flex; flex-direction:column; gap:12px; }
+.social-link {
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--serif-title); font-size:15px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--text2); text-decoration:none;
+  padding:10px 14px; border:1px solid var(--border); transition:color 0.2s, border-color 0.2s;
+}
+.social-link:hover { color:var(--gold2); border-color:var(--border2); }
+.social-icon { font-size:16px; }
+.footer-bottom {
+  border-top:1px solid var(--border); padding-top:28px;
+  display:flex; justify-content:space-between; align-items:center;
+  max-width:1200px; margin:0 auto;
+}
+.footer-copy { font-family:var(--serif-body); font-size:18px; color:var(--text2); font-style:italic; }
+.footer-bottom-logo img { height:56px; filter:opacity(0.55); transition:filter 0.2s; }
+.footer-bottom-logo img:hover { filter:opacity(0.75); }
+
+/* ── SCROLL REVEAL ── */
+.reveal       { opacity:0; transform:translateY(32px);  transition:opacity 0.85s ease, transform 0.85s ease; }
+.reveal-l     { opacity:0; transform:translateX(-36px); transition:opacity 0.85s ease, transform 0.85s ease; }
+.reveal-r     { opacity:0; transform:translateX(36px);  transition:opacity 0.85s ease, transform 0.85s ease; }
+.reveal-scale { opacity:0; transform:scale(0.94);       transition:opacity 0.85s ease, transform 0.85s ease; }
+.reveal.in, .reveal-l.in, .reveal-r.in, .reveal-scale.in { opacity:1; transform:none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width:1024px) {
+  nav { padding:0 28px; }
+  .intro-grid, .middle-ages-grid, .pole-band-grid, .today-grid { grid-template-columns:1fr; gap:48px; }
+  .intro, .middle-ages, .pole-band, .timeline-section, .today-section, .pull-quote-section { padding:80px 28px; }
+  .timeline::before { left:28px; }
+  .tl-item { grid-template-columns:28px 1fr; }
+  .tl-text-left { display:none; }
+  .tl-text-right { padding-left:24px; text-align:left; }
+  .tl-text-empty { display:none; }
+  .tl-node { justify-content:flex-start; }
+  footer { padding:48px 28px 28px; }
+  .footer-grid { grid-template-columns:1fr 1fr; gap:32px; }
+  .footer-bottom { flex-direction:column; gap:12px; text-align:center; }
+}
+@media (max-width:640px) {
+  nav .nav-links { display:none; }
+  .page-hero-title { font-size:clamp(44px, 14vw, 72px); }
+  .footer-grid { grid-template-columns:1fr; }
+  .today-cta-btns { flex-direction:column; align-items:center; }
+}
+</style>
+<link rel="icon" type="image/png" href="assets/logoico.png">
+<link rel="apple-touch-icon" href="assets/logoico.png">
+<meta name="msapplication-TileImage" content="assets/logoico.png">
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.png" alt="Lighttown Barbershop">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="history.html" class="active">History</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Afspraak Maken</a>
+</nav>
+
+<!-- ═══ PAGE HERO ═══ -->
+<section class="page-hero">
+  <div class="page-hero-bg" id="heroBg"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Lighttown Barbershop · Eindhoven</div>
+    <h1 class="page-hero-title">History</h1>
+    <p class="page-hero-sub">Geschiedenis Uit De Wereld Van De Barbieren</p>
+  </div>
+  <div class="page-hero-line"></div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="ornament"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+</div>
+
+<!-- ═══ INTRO — De barbier ═══ -->
+<section class="intro">
+  <div class="intro-grid">
+
+    <div class="reveal-l">
+      <div class="section-eyebrow">Het Vak</div>
+      <h2 class="history-title">De <em>Barbier</em> —<br>Een Eeuwenoud Ambacht</h2>
+      <p class="history-body">
+        Een barbier houdt zich bezig met het scheren, knippen en verzorgen van baarden en snorren. Tevens is hij vaak herenkapper.
+      </p>
+      <p class="history-body">
+        Barbier is een <strong>zeer oud beroep</strong> dat bij de Egyptenaren al in hoog aanzien stond. De naam is afgeleid van het Latijnse <em>barba</em>, dat baard betekent. Vanaf de 14de eeuw begonnen de barbiers zich te verenigen in gildes.
+      </p>
+      <p class="history-body">
+        In de middeleeuwen omvatte het werkterrein van de barbier ook dat van chirurgijn — een soort combinatie van tandarts en geneesheer. Iemand die dit alles tegelijk deed werd dan ook de <strong>"barbier-chirurgijn"</strong> genoemd. Het trekken van kiezen en aderlaten waren de meest voorkomende behandelingen.
+      </p>
+    </div>
+
+    <div class="framed-img reveal-r">
+      <div class="img-corner tl"></div>
+      <div class="img-corner tr"></div>
+      <div class="img-corner bl"></div>
+      <div class="img-corner br"></div>
+      <img src="assets/history1.jpg" alt="Barbershop pole" style="aspect-ratio:3/4;">
+    </div>
+
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="ornament"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+</div>
+
+<!-- ═══ PULL QUOTE ═══ -->
+<section class="pull-quote-section">
+  <div class="pull-quote reveal">
+    <span class="pq-mark">"</span>
+    <p class="pq-text">
+      Aan dit laatste herinnert de rood-witte paal bij de ingang van de kapperswinkel. Zij is een representatie van de zwachtels die na het aderlaten werden uitgehangen om te drogen en in elkaar verstrengeld raakten.
+    </p>
+    <span class="pq-source">— De Origine van de Barbier</span>
+  </div>
+</section>
+
+<!-- ═══ MIDDELEEUWEN ═══ -->
+<section class="middle-ages">
+  <div class="middle-ages-grid">
+
+    <div class="framed-img reveal-l">
+      <div class="img-corner tl"></div>
+      <div class="img-corner tr"></div>
+      <div class="img-corner bl"></div>
+      <div class="img-corner br"></div>
+      <img src="assets/history3.jpg" alt="Vintage barbershop interieur" style="aspect-ratio:4/3;">
+    </div>
+
+    <div class="reveal-r">
+      <div class="section-eyebrow">Het Scheermes</div>
+      <h2 class="history-title">Van <em>Chirurgijn</em><br>tot Gentleman's Barber</h2>
+      <p class="history-body">
+        Het scheren van de baard gebeurt met een <strong>zeer scherp scheermes</strong> dat op leren banden gescherpt wordt. Door de ontwikkeling van het veiligheidsscheermes en het elektrische scheerapparaat raakte het beroep in Europa en Noord-Amerika na de Middeleeuwen steeds meer in onbruik.
+      </p>
+      <p class="history-body">
+        In veel Aziatische en Afrikaanse landen wordt het beroep van barbier echter nog steeds beoefend, vaak op straat, in combinatie met schoenen poetsen.
+      </p>
+      <p class="history-body">
+        Het verschil tussen kapper en barbier is in principe dat een barbier meer <strong>gespecialiseerd is in baarden en snorren</strong>, terwijl een kapper vooral het hoofdhaar verzorgt. Tegenwoordig is er nauwelijks meer een verschil tussen een barbier en een kapper.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="ornament"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+</div>
+
+<!-- ═══ BARBER POLE ═══ -->
+<section class="pole-band">
+  <div class="pole-band-grid">
+
+    <div class="reveal-l">
+      <div class="section-eyebrow">Het Symbool</div>
+      <h2 class="history-title">De <em>Barbiersstok</em> —<br>Rood, Wit & Blauw</h2>
+      <p class="history-body">
+        De bekende <strong>draaiende barbiersstok</strong> — rood, wit en soms blauw — is een van de meest herkenbare symbolen in de westerse wereld. Zijn oorsprong gaat terug naar de middeleeuwen, toen de barbier ook de rol van chirurgijn vervulde.
+      </p>
+      <p class="history-body">
+        Het <strong>rood</strong> staat voor het bloed van aderlating. Het <strong>wit</strong> symboliseert de verbanden. Het <strong>blauw</strong> — dat in Amerika werd toegevoegd — verwijst naar de aders zelf. Samen vertellen ze het verhaal van een vak dat eeuwenlang leven en dood raakte.
+      </p>
+      <p class="history-body">
+        Vandaag de dag is de draaiende paal aan de gevel een uitnodiging voor elke gentleman: hier word je goed behandeld. Hier kom je tot rust. Hier is vakmanschap in goede handen.
+      </p>
+    </div>
+
+    <div class="pole-img-wrap reveal-r">
+      <div class="img-corner tl"></div>
+      <div class="img-corner tr"></div>
+      <div class="img-corner bl"></div>
+      <div class="img-corner br"></div>
+      <img src="assets/history5.jpg" alt="Barbershop stoel vintage">
+    </div>
+
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="ornament"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+</div>
+
+<!-- ═══ TIMELINE ═══ -->
+<section class="timeline-section">
+  <div class="timeline-header">
+    <div class="section-eyebrow-center reveal">Tijdlijn</div>
+    <h2 class="timeline-title reveal">Het <em>Barbiersvak</em><br>door de Eeuwen</h2>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item reveal">
+      <div class="tl-text-left">
+        <span class="tl-year">3500 v.C.</span>
+        <div class="tl-heading">De Egyptenaren</div>
+        <p class="tl-desc">Barbiers genieten hoog aanzien in het oude Egypte. Scheren en verzorgen is een ritueel verbonden aan religie en status.</p>
+      </div>
+      <div class="tl-node"><div class="tl-dot"></div></div>
+      <div class="tl-text-empty"></div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-text-empty"></div>
+      <div class="tl-node"><div class="tl-dot"></div></div>
+      <div class="tl-text-right">
+        <span class="tl-year">14de Eeuw</span>
+        <div class="tl-heading">De Gildes</div>
+        <p class="tl-desc">Barbiers verenigen zich in gildes. Het vak krijgt officiële erkenning en een formele opleiding. De barbier-chirurgijn ontstaat.</p>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-text-left">
+        <span class="tl-year">1540</span>
+        <div class="tl-heading">Scheiding der Gildes</div>
+        <p class="tl-desc">Koning Hendrik VIII scheidt de barbiers officieel van de chirurgijns. Het medische werk wordt verboden — het kappersvak is geboren.</p>
+      </div>
+      <div class="tl-node"><div class="tl-dot"></div></div>
+      <div class="tl-text-empty"></div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-text-empty"></div>
+      <div class="tl-node"><div class="tl-dot"></div></div>
+      <div class="tl-text-right">
+        <span class="tl-year">19de Eeuw</span>
+        <div class="tl-heading">Gouden Tijdperk</div>
+        <p class="tl-desc">De barbershop bloeit in Europa en Amerika. De draaiende paal staat aan elke gevel. Het is de plek voor mannen om samen te komen, te praten en verzorgd te worden.</p>
+      </div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-text-left">
+        <span class="tl-year">20ste Eeuw</span>
+        <div class="tl-heading">Teruggang & Revival</div>
+        <p class="tl-desc">Het veiligheidsscheermes en de opkomst van de kapper doen de barbershop terugwijken. Maar in de late jaren 2000 begint de spectaculaire revival — en is de barbershop weer een cultureel fenomeen.</p>
+      </div>
+      <div class="tl-node"><div class="tl-dot"></div></div>
+      <div class="tl-text-empty"></div>
+    </div>
+
+    <div class="tl-item reveal">
+      <div class="tl-text-empty"></div>
+      <div class="tl-node"><div class="tl-dot"></div></div>
+      <div class="tl-text-right">
+        <span class="tl-year">2024</span>
+        <div class="tl-heading">Lighttown Barbershop</div>
+        <p class="tl-desc">Op de Leenderweg 80-b in Eindhoven opent een nieuwe schakel in deze lange keten. Een plek waar vakmanschap, sfeer en ontspanning samenkomen.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="ornament"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+</div>
+
+<!-- ═══ TODAY — Lighttown ═══ -->
+<section class="today-section">
+  <div class="today-grid">
+
+    <div class="framed-img reveal-l">
+      <div class="img-corner tl"></div>
+      <div class="img-corner tr"></div>
+      <div class="img-corner bl"></div>
+      <div class="img-corner br"></div>
+      <img src="assets/history7.jpg" alt="Lighttown Barbershop vandaag" style="aspect-ratio:4/3;">
+    </div>
+
+    <div class="reveal-r">
+      <div class="section-eyebrow">Vandaag</div>
+      <h2 class="history-title"><em>Lighttown</em> —<br>Jouw Plek in de Lichtstad</h2>
+      <p class="history-body">
+        In deze lange traditie van het barbiersvak staat <strong>Lighttown Barbershop</strong> in Eindhoven. Geen nostalgie omwille van de nostalgie — maar een echte, warme plek waar vakmanschap centraal staat.
+      </p>
+      <p class="history-body">
+        Een gentleman's mancave, bijna een tweede huiskamer. Waar je welkom bent voor een frisse knipbeurt, uitgebreid onderhoud van je baard, en een <em>goede bak koffie</em>. Een moment om even los te laten.
+      </p>
+
+      <div class="today-cta-box">
+        <div class="today-cta-title">Maak een Afspraak</div>
+        <p class="today-cta-sub">Online of gewoon binnenlopen — altijd welkom.</p>
+        <div class="today-cta-btns">
+          <a href="https://wa.me/31613877236" target="_blank" class="btn-gold">Boek via WhatsApp</a>
+          <a href="services.html" class="btn-outline-gold">Bekijk Diensten</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="assets/logo.png" alt="Lighttown Barbershop">
+      <p class="footer-tagline">Een jonge barbier waar je lekker kunt ontspannen en advies krijgt over een goeie haircut of beardtrim.</p>
+    </div>
+    <div class="footer-col footer-contact">
+      <h4>Contact Info</h4>
+      <p>
+        Leenderweg 80-b, 5615 AB<br>
+        Eindhoven<br><br>
+        +31 6 138 77 236<br>
+        info@lighttown-barbershop.nl
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="history.html">History</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Socials</h4>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/lighttownbarbershop?igsh=MXQyZ3ZpamFlamZxYg%3D%3D" target="_blank" class="social-link">
+          <span class="social-icon">📷</span> Instagram
+        </a>
+        <a href="https://wa.me/31613877236" target="_blank" class="social-link">
+          <span class="social-icon">💬</span> WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ornament" style="margin:0 auto 32px; max-width:400px; opacity:0.3">
+    <span class="ornament-symbol">✦</span>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 | Lighttown Barbershop — Alle rechten voorbehouden</p>
+    <div class="footer-bottom-logo">
+      <img src="assets/logo.png" alt="Lighttown">
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV scroll
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.style.background = window.scrollY > 60
+    ? 'rgba(8,6,3,0.97)'
+    : 'rgba(8,6,3,0.82)';
+});
+
+// Hero BG
+const heroBg = document.getElementById('heroBg');
+setTimeout(() => heroBg.classList.add('loaded'), 100);
+window.addEventListener('scroll', () => {
+  heroBg.style.transform = `translateY(${window.scrollY * 0.25}px) scale(1.04)`;
+});
+
+// Scroll reveal
+const revObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el   = entry.target;
+      const base = parseFloat(el.style.transitionDelay) || 0;
+      setTimeout(() => el.classList.add('in'), base * 1000);
+      revObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-scale')
+  .forEach(el => revObs.observe(el));
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

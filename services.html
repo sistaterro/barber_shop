@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Lighttown Barbershop</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --black:    #080603;
+  --dark:     #100d08;
+  --dark2:    #1a1510;
+  --dark3:    #241e16;
+  --gold:     #c8963c;
+  --gold2:    #e8b86e;
+  --gold3:    #f5d090;
+  --gold-dim: rgba(200,150,60,0.15);
+  --cream:    #f0e8d4;
+  --cream2:   #d8cbb0;
+  --text:     #ede4d0;
+  --text2:    #e0d1b6;
+  --text3:    #c0ab89;
+  --border:   rgba(200,150,60,0.2);
+  --border2:  rgba(200,150,60,0.4);
+  --serif-display: 'Cinzel Decorative', serif;
+  --serif-title:   'Cinzel', serif;
+  --serif-body:    'EB Garamond', Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: auto; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--serif-body);
+  font-size: 18px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Noise texture */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none; opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 256px;
+}
+
+/* ── ORNAMENT ── */
+.ornament {
+  display: flex; align-items: center; justify-content: center;
+  gap: 14px; opacity: 0.7; margin: 0 auto; width: 100%;
+}
+.ornament::before { content:''; flex:1; max-width:200px; height:1px; background:linear-gradient(to right, transparent, var(--gold)); }
+.ornament::after  { content:''; flex:1; max-width:200px; height:1px; background:linear-gradient(to left,  transparent, var(--gold)); }
+.ornament-symbol  { font-size:18px; letter-spacing:6px; color:var(--gold); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:500;
+  height: 72px; display:flex; align-items:center; justify-content:space-between;
+  padding: 0 56px;
+  background: rgba(8,6,3,0.82);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border); transition: background 0.3s;
+}
+nav::after {
+  content:''; position:absolute; bottom:0; left:10%; right:10%; height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent); opacity:0.5;
+}
+.nav-logo img { height:68px; width:auto; filter:drop-shadow(0 2px 8px rgba(200,150,60,0.3)); transition:filter 0.3s; }
+.nav-logo img:hover { filter:drop-shadow(0 2px 16px rgba(200,150,60,0.6)); }
+.nav-links { display:flex; gap:40px; list-style:none; }
+.nav-links a {
+  font-family:var(--serif-title); font-size:14px; font-weight:500;
+  letter-spacing:3px; text-transform:uppercase; color:var(--text2);
+  text-decoration:none; transition:color 0.2s; position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-4px; left:50%; transform:translateX(-50%);
+  width:0; height:1px; background:var(--gold); transition:width 0.25s ease;
+}
+.nav-links a:hover, .nav-links a.active { color:var(--gold2); }
+.nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+.nav-cta {
+  font-family:var(--serif-title); font-size:12px; font-weight:600;
+  letter-spacing:3px; text-transform:uppercase; color:var(--black);
+  background:linear-gradient(135deg, var(--gold), var(--gold2));
+  padding:10px 24px; text-decoration:none;
+  clip-path:polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  transition:filter 0.2s, transform 0.15s;
+  box-shadow: 0 2px 14px rgba(200,150,60,0.4);
+}
+.nav-cta:hover { filter:brightness(1.15); transform:translateY(-1px); }
+
+/* ── BUTTONS ── */
+.btn-gold {
+  font-family:var(--serif-title); font-size:12px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--black);
+  background:linear-gradient(135deg, var(--gold), var(--gold2));
+  padding:14px 32px; text-decoration:none; display:inline-block;
+  clip-path:polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  box-shadow:0 4px 24px rgba(200,150,60,0.5);
+  transition:filter 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.btn-gold:hover { filter:brightness(1.1); transform:translateY(-2px); box-shadow:0 8px 36px rgba(200,150,60,0.6); }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  position:relative; height:72vh; min-height:500px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; overflow:hidden;
+}
+.page-hero-bg {
+  position:absolute; inset:0;
+  background-image: url('assets/history4.jpg');
+  background-size:cover; background-position:center 50%;
+  filter:brightness(0.28) sepia(0.32) contrast(1.08);
+  transform:scale(1.08); transition:transform 1s ease;
+}
+.page-hero-bg.loaded { transform:scale(1.04); }
+.page-hero-overlay {
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to bottom,
+      rgba(8,6,3,0.62) 0%,
+      rgba(8,6,3,0.16) 40%,
+      rgba(8,6,3,0.16) 60%,
+      rgba(8,6,3,0.95) 100%);
+}
+.page-hero-content {
+  position:relative; z-index:10;
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+  padding:0 32px;
+  animation: pageReveal 1s ease both;
+}
+@keyframes pageReveal {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.page-hero-eyebrow {
+  font-family:var(--serif-title); font-size:12px;
+  letter-spacing:6px; text-transform:uppercase; color:var(--gold);
+}
+.page-hero-title {
+  font-family:var(--serif-display);
+  font-size:clamp(48px, 9vw, 100px);
+  font-weight:700; line-height:0.95; letter-spacing:2px;
+  color:var(--cream);
+  text-shadow:0 6px 44px rgba(0,0,0,0.92), 0 0 90px rgba(200,150,60,0.14);
+}
+.page-hero-sub {
+  font-family:var(--serif-title); font-size:13px;
+  letter-spacing:5px; text-transform:uppercase; color:var(--text3); margin-top:8px;
+}
+.page-hero-line {
+  position:absolute; bottom:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(200,150,60,0.45), transparent);
+}
+
+/* ── SECTION DIVIDER ── */
+.section-divider {
+  position:relative; z-index:10; padding:32px 56px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--dark);
+  border-top:1px solid rgba(200,150,60,0.08);
+  border-bottom:1px solid rgba(200,150,60,0.08);
+}
+
+/* ═══════════════════════════════════════════════
+   PRICE SECTION — with flanking images
+═══════════════════════════════════════════════ */
+.price-section {
+  position:relative; z-index:10;
+  padding:100px 0;
+  overflow:hidden;
+}
+.price-section.dark  { background:var(--dark); }
+.price-section.black { background:var(--black); }
+
+/* Decorative gradient behind the whole section */
+.price-section.dark::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 50%, rgba(200,150,60,0.03), transparent);
+  pointer-events:none;
+}
+
+/* ── THREE-COLUMN LAYOUT: img | content | img ── */
+.price-layout {
+  display:grid;
+  grid-template-columns: 200px 1fr 200px;
+  gap:0;
+  max-width:1280px;
+  margin:0 auto;
+  align-items:stretch;
+  min-height:480px;
+}
+
+/* Side images */
+.side-img {
+  position:relative; overflow:hidden;
+  opacity:0;
+  transition: opacity 1s ease, transform 1s ease;
+}
+.side-img.left  { transform:translateX(-40px); }
+.side-img.right { transform:translateX(40px); }
+.side-img.in    { opacity:1; transform:translateX(0); }
+
+.side-img img {
+  width:100%; height:100%; object-fit:cover;
+  filter: sepia(1) contrast(0.85) brightness(0.6);
+  transition: filter 0.6s;
+}
+.side-img:hover img { filter: sepia(0.6) contrast(0.9) brightness(0.75); }
+
+/* Gold fade edges on side images */
+.side-img::before {
+  content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
+}
+.side-img.left::before {
+  background:linear-gradient(to right, rgba(8,6,3,0.3), transparent 60%);
+}
+.side-img.right::before {
+  background:linear-gradient(to left, rgba(8,6,3,0.3), transparent 60%);
+}
+
+/* Gold vertical line between image and content */
+.side-img::after {
+  content:''; position:absolute; top:10%; bottom:10%; z-index:3;
+  width:1px;
+  background:linear-gradient(to bottom, transparent, rgba(200,150,60,0.35), transparent);
+}
+.side-img.left::after  { right:0; }
+.side-img.right::after { left:0; }
+
+/* ── PRICE CONTENT — centre column ── */
+.price-content {
+  padding:64px 72px;
+  display:flex; flex-direction:column; align-items:center;
+}
+
+.price-category {
+  width:100%; max-width:580px; margin-bottom:56px;
+}
+.price-category:last-child { margin-bottom:0; }
+
+.cat-header {
+  text-align:center; margin-bottom:32px;
+}
+.cat-eyebrow {
+  font-family:var(--serif-title); font-size:14px; letter-spacing:5px;
+  text-transform:uppercase; color:var(--gold); opacity:0.7; margin-bottom:10px;
+}
+.cat-title {
+  font-family:var(--serif-display);
+  font-size:clamp(22px, 2.8vw, 34px); font-weight:700;
+  color:var(--cream); letter-spacing:1px;
+  position:relative; display:inline-block;
+}
+/* Decorative lines flanking the category title */
+.cat-title-wrap {
+  display:flex; align-items:center; justify-content:center; gap:18px;
+}
+.cat-title-wrap::before,
+.cat-title-wrap::after {
+  content:''; flex:1; max-width:80px; height:1px;
+  background:linear-gradient(to right, transparent, rgba(200,150,60,0.5));
+}
+.cat-title-wrap::after {
+  background:linear-gradient(to left, transparent, rgba(200,150,60,0.5));
+}
+
+/* Price rows */
+.price-list {
+  display:flex; flex-direction:column; gap:0;
+}
+
+.price-row {
+  display:flex; align-items:baseline; justify-content:space-between;
+  padding:15px 20px;
+  border-bottom:1px solid rgba(200,150,60,0.1);
+  position:relative; overflow:hidden;
+  transition:background 0.2s;
+  cursor:default;
+}
+.price-row:first-child { border-top:1px solid rgba(200,150,60,0.1); }
+.price-row:hover { background:rgba(200,150,60,0.04); }
+
+/* Sliding gold line on hover */
+.price-row::before {
+  content:''; position:absolute; left:0; top:0; bottom:0; width:2px;
+  background:var(--gold);
+  transform:scaleY(0); transform-origin:bottom;
+  transition:transform 0.3s ease;
+}
+.price-row:hover::before { transform:scaleY(1); }
+
+.price-name {
+  font-family:var(--serif-title); font-size:18px; font-weight:500;
+  letter-spacing:2px; text-transform:uppercase; color:var(--text);
+  transition:color 0.2s;
+}
+.price-row:hover .price-name { color:var(--gold2); }
+
+.price-dots {
+  flex:1; margin:0 14px;
+  height:1px; align-self:center;
+  background:repeating-linear-gradient(
+    to right,
+    rgba(200,150,60,0.25) 0px,
+    rgba(200,150,60,0.25) 3px,
+    transparent 3px,
+    transparent 9px
+  );
+}
+
+.price-amount {
+  font-family:var(--serif-title); font-size:24px; font-weight:600;
+  color:var(--gold2); letter-spacing:1px; white-space:nowrap;
+  transition:color 0.2s;
+}
+.price-row:hover .price-amount { color:var(--gold3); }
+
+/* Category separator ornament */
+.cat-separator {
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  padding:32px 0 40px; opacity:0.45;
+}
+.cat-separator::before,
+.cat-separator::after {
+  content:''; flex:1; max-width:100px; height:1px;
+  background:var(--gold);
+}
+.cat-sep-symbol { font-size:14px; color:var(--gold); letter-spacing:4px; }
+
+/* ═══════════════════════════════════════════════
+   BOTTOM CTA BAND
+═══════════════════════════════════════════════ */
+.cta-band {
+  position:relative; z-index:10;
+  background:var(--dark3);
+  border-top:1px solid var(--border2);
+  border-bottom:1px solid var(--border2);
+  padding:72px 56px; text-align:center; overflow:hidden;
+}
+.cta-band::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 70% 80% at 50% 50%, rgba(200,150,60,0.06), transparent);
+  pointer-events:none;
+}
+.cta-band::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.cta-band-title {
+  font-family:var(--serif-title); font-size:clamp(18px, 2.5vw, 28px); font-weight:600;
+  color:var(--cream); letter-spacing:-0.2px; margin-bottom:10px;
+}
+.cta-band-title em { font-style:italic; color:var(--gold2); }
+.cta-band-sub {
+  font-family:var(--serif-body); font-size:17px; font-style:italic;
+  color:var(--text3); margin-bottom:32px;
+}
+.cta-band-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+.btn-outline-gold {
+  font-family:var(--serif-title); font-size:12px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--gold2); background:transparent;
+  padding:13px 30px; text-decoration:none; display:inline-block;
+  border:1px solid rgba(200,150,60,0.5);
+  clip-path:polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  transition:background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.btn-outline-gold:hover { background:rgba(200,150,60,0.1); border-color:var(--gold); transform:translateY(-2px); }
+
+/* ═══════════════════════════════════════════════
+   NOTE BLOCK
+═══════════════════════════════════════════════ */
+.note-block {
+  position:relative; z-index:10;
+  background:var(--dark); padding:48px 56px;
+  border-top:1px solid rgba(200,150,60,0.08);
+}
+.note-inner {
+  max-width:700px; margin:0 auto; text-align:center;
+}
+.note-text {
+  font-family:var(--serif-body); font-size:17px; font-style:italic;
+  color:var(--text3); line-height:1.8;
+}
+.note-text strong { color:var(--text2); font-style:normal; }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  position:relative; z-index:10;
+  background:var(--black); border-top:1px solid var(--border);
+  padding:64px 56px 36px;
+}
+footer::before {
+  content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent); opacity:0.3;
+}
+.footer-grid {
+  display:grid; grid-template-columns:1.4fr 1fr 1fr 0.8fr;
+  gap:48px; max-width:1200px; margin:0 auto 48px;
+}
+.footer-brand img { height:96px; width:auto; filter:drop-shadow(0 2px 8px rgba(200,150,60,0.2)); margin-bottom:16px; }
+.footer-tagline { font-family:var(--serif-body); font-size:20px; font-style:italic; color:var(--text3); line-height:1.7; max-width:240px; }
+.footer-col h4 { font-family:var(--serif-title); font-size:16px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:18px; padding-bottom:10px; border-bottom:1px solid var(--border); }
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.footer-col ul li a { font-family:var(--serif-body); font-size:19px; color:var(--text3); text-decoration:none; transition:color 0.2s; }
+.footer-col ul li a:hover { color:var(--gold2); }
+.footer-contact p { font-family:var(--serif-body); font-size:19px; color:var(--text3); line-height:1.8; }
+.footer-social { display:flex; flex-direction:column; gap:12px; }
+.social-link { display:flex; align-items:center; gap:10px; font-family:var(--serif-title); font-size:15px; letter-spacing:2px; text-transform:uppercase; color:var(--text2); text-decoration:none; padding:10px 14px; border:1px solid var(--border); transition:color 0.2s, border-color 0.2s; }
+.social-link:hover { color:var(--gold2); border-color:var(--border2); }
+.social-icon { font-size:16px; }
+.footer-bottom { border-top:1px solid var(--border); padding-top:28px; display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; }
+.footer-copy { font-family:var(--serif-body); font-size:18px; color:var(--text2); font-style:italic; }
+.footer-bottom-logo img { height:56px; filter:opacity(0.55); transition:filter 0.2s; }
+.footer-bottom-logo img:hover { filter:opacity(0.75); }
+
+/* ── REVEAL ── */
+.reveal       { opacity:0; transform:translateY(32px);  transition:opacity 0.85s ease, transform 0.85s ease; }
+.reveal-l     { opacity:0; transform:translateX(-36px); transition:opacity 0.85s ease, transform 0.85s ease; }
+.reveal-r     { opacity:0; transform:translateX(36px);  transition:opacity 0.85s ease, transform 0.85s ease; }
+.reveal.in, .reveal-l.in, .reveal-r.in { opacity:1; transform:none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width:1100px) {
+  .price-layout { grid-template-columns:120px 1fr 120px; }
+  .price-content { padding:56px 40px; }
+}
+@media (max-width:900px) {
+  .price-layout { grid-template-columns:0 1fr 0; }
+  .side-img { display:none; }
+  .price-content { padding:48px 32px; }
+  nav { padding:0 28px; }
+  footer { padding:48px 28px 28px; }
+  .footer-grid { grid-template-columns:1fr 1fr; gap:32px; }
+  .footer-bottom { flex-direction:column; gap:12px; text-align:center; }
+  .cta-band { padding:56px 28px; }
+  .note-block { padding:36px 28px; }
+}
+@media (max-width:640px) {
+  nav .nav-links { display:none; }
+  .price-content { padding:36px 20px; }
+  .price-name { font-size:16px; }
+  .price-amount { font-size:20px; }
+  .footer-grid { grid-template-columns:1fr; }
+}
+</style>
+<link rel="icon" type="image/png" href="assets/logoico.png">
+<link rel="apple-touch-icon" href="assets/logoico.png">
+<meta name="msapplication-TileImage" content="assets/logoico.png">
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.png" alt="Lighttown Barbershop">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="history.html">History</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Afspraak Maken</a>
+</nav>
+
+<!-- ═══ PAGE HERO ═══ -->
+<section class="page-hero">
+  <div class="page-hero-bg" id="heroBg"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-eyebrow">Lighttown Barbershop · Eindhoven</div>
+    <h1 class="page-hero-title">Services</h1>
+    <p class="page-hero-sub">Vakmanschap · Stijl · Precisie</p>
+  </div>
+  <div class="page-hero-line"></div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="ornament"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+</div>
+
+<!-- ═══ HAIRCUT SECTION ═══ -->
+<section class="price-section dark">
+  <div class="price-layout">
+
+    <!-- Left image — slides in from left -->
+    <div class="side-img left" data-reveal="left">
+      <img src="assets/history1.jpg" alt="">
+    </div>
+
+    <!-- Centre: price list -->
+    <div class="price-content">
+      <div class="price-category reveal">
+
+        <div class="cat-header">
+          <div class="cat-eyebrow">01</div>
+          <div class="cat-title-wrap">
+            <h2 class="cat-title">Haircut</h2>
+          </div>
+        </div>
+
+        <div class="price-list">
+          <div class="price-row">
+            <span class="price-name">Men Haircut</span>
+            <span class="price-dots"></span>
+            <span class="price-amount">€ 25,-</span>
+          </div>
+          <div class="price-row">
+            <span class="price-name">Men Head Shave <small style="font-size:14px;color:var(--text3);letter-spacing:1px;">(Clipper Only)</small></span>
+            <span class="price-dots"></span>
+            <span class="price-amount">€ 20,-</span>
+          </div>
+          <div class="price-row">
+            <span class="price-name">Men Hair &amp; Beard Cut</span>
+            <span class="price-dots"></span>
+            <span class="price-amount">€ 40,-</span>
+          </div>
+          <div class="price-row">
+            <span class="price-name">Men Hair &amp; Beard Trim <small style="font-size:14px;color:var(--text3);letter-spacing:1px;">(1 Length)</small></span>
+            <span class="price-dots"></span>
+            <span class="price-amount">€ 35,-</span>
+          </div>
+          <div class="price-row">
+            <span class="price-name">Men Contour</span>
+            <span class="price-dots"></span>
+            <span class="price-amount">€ 10,-</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right image — slides in from right -->
+    <div class="side-img right" data-reveal="right">
+      <img src="assets/history3.jpg" alt="">
+    </div>
+
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="ornament"><span class="ornament-symbol">✂ · ✂</span></div>
+</div>
+
+<!-- ═══ BEARD SECTION ═══ -->
+<section class="price-section black">
+  <div class="price-layout">
+
+    <!-- Left image -->
+    <div class="side-img left" data-reveal="left">
+      <img src="assets/history6.jpg" alt="">
+    </div>
+
+    <!-- Centre: price list -->
+    <div class="price-content">
+      <div class="price-category reveal">
+
+        <div class="cat-header">
+          <div class="cat-eyebrow">02</div>
+          <div class="cat-title-wrap">
+            <h2 class="cat-title">Beard</h2>
+          </div>
+        </div>
+
+        <div class="price-list">
+          <div class="price-row">
+            <span class="price-name">Beard</span>
+            <span class="price-dots"></span>
+            <span class="price-amount">€ 20,-</span>
+          </div>
+          <div class="price-row">
+            <span class="price-name">Beard Trim <small style="font-size:14px;color:var(--text3);letter-spacing:1px;">(1 Length)</small></span>
+            <span class="price-dots"></span>
+            <span class="price-amount">€ 12,50</span>
+          </div>
+          <div class="price-row">
+            <span class="price-name">Beard Contour</span>
+            <span class="price-dots"></span>
+            <span class="price-amount">€ 7,50</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right image -->
+    <div class="side-img right" data-reveal="right">
+      <img src="assets/history8.jpg" alt="">
+    </div>
+
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="ornament"><span class="ornament-symbol">✦ ✦ ✦</span></div>
+</div>
+
+<!-- ═══ NOTE ═══ -->
+<div class="note-block">
+  <div class="note-inner reveal">
+    <p class="note-text">
+      <strong>Prijzen inclusief BTW.</strong> Bij twijfel over welke behandeling het beste bij jou past, adviseren we je graag vrijblijvend. Loop gewoon even binnen of neem contact op.
+    </p>
+  </div>
+</div>
+
+<!-- ═══ CTA BAND ═══ -->
+<section class="cta-band">
+  <div class="reveal">
+    <div class="ornament" style="margin-bottom:28px; max-width:300px;">
+      <span class="ornament-symbol">✦</span>
+    </div>
+    <h2 class="cta-band-title">Klaar voor een <em>nieuwe look?</em></h2>
+    <p class="cta-band-sub">Boek je afspraak online of kom gewoon binnenlopen — altijd welkom.</p>
+    <div class="cta-band-btns">
+      <a href="https://wa.me/31613877236" target="_blank" class="btn-gold">Boek via WhatsApp</a>
+      <a href="contact.html" class="btn-outline-gold">Neem Contact Op</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="assets/logo.png" alt="Lighttown Barbershop">
+      <p class="footer-tagline">Een jonge barbier waar je lekker kunt ontspannen en advies krijgt over een goeie haircut of beardtrim.</p>
+    </div>
+    <div class="footer-col footer-contact">
+      <h4>Contact Info</h4>
+      <p>
+        Leenderweg 80-b, 5615 AB<br>
+        Eindhoven<br><br>
+        +31 6 138 77 236<br>
+        info@lighttown-barbershop.nl
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="history.html">History</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Socials</h4>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/lighttownbarbershop?igsh=MXQyZ3ZpamFlamZxYg%3D%3D" target="_blank" class="social-link">
+          <span class="social-icon">📷</span> Instagram
+        </a>
+        <a href="https://wa.me/31613877236" target="_blank" class="social-link">
+          <span class="social-icon">💬</span> WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ornament" style="margin:0 auto 32px; max-width:400px; opacity:0.3">
+    <span class="ornament-symbol">✦</span>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 | Lighttown Barbershop — Alle rechten voorbehouden</p>
+    <div class="footer-bottom-logo">
+      <img src="assets/logo.png" alt="Lighttown">
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── NAV scroll darkening
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.style.background = window.scrollY > 60
+    ? 'rgba(8,6,3,0.97)'
+    : 'rgba(8,6,3,0.82)';
+});
+
+// ── Hero BG parallax
+const heroBg = document.getElementById('heroBg');
+setTimeout(() => heroBg.classList.add('loaded'), 100);
+window.addEventListener('scroll', () => {
+  heroBg.style.transform = `translateY(${window.scrollY * 0.25}px) scale(1.04)`;
+});
+
+// ── Side images slide-in observer
+const sideObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      sideObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.side-img').forEach(el => sideObs.observe(el));
+
+// ── General scroll reveal
+const revObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el   = entry.target;
+      const base = parseFloat(el.style.transitionDelay) || 0;
+      setTimeout(() => el.classList.add('in'), base * 1000);
+      revObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => revObs.observe(el));
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
