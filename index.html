@@ -195,8 +195,10 @@ nav::after {
 ═══════════════════════════════════════════════ */
 .hero {
   position: relative;
-  height: 100vh;
-  min-height: 680px;
+  height: auto;
+  min-height: max(680px, 100vh);
+  padding: 96px 0 88px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -944,6 +946,15 @@ footer::before {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
 }
+/* Keep the complete hero composition visible on short desktop screens. */
+@media (max-height: 850px) and (min-width: 641px) {
+  .hero { padding-top: 88px; padding-bottom: 72px; }
+  .hero-content { gap: 12px; }
+  .hero-main-logo { width: clamp(250px, 32vh, 430px); margin: 0 0 2px; }
+  .hero-frame { padding-top: 28px; padding-bottom: 28px; }
+  .hero-ctas { margin-top: 6px; }
+  .hero-scroll { bottom: 18px; }
+}
 @media (max-width: 640px) {
   nav .nav-links { display: none; }
   .hero-main-logo { width: clamp(225px, 62vw, 360px); margin-top: 2px; margin-bottom: 4px; }
@@ -975,9 +986,9 @@ footer::before {
     <li><a href="index.html">Home</a></li>
     <li><a href="history.html">History</a></li>
     <li><a href="services.html">Services</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="booking.html">Contact</a></li>
   </ul>
-  <a href="contact.html" class="nav-cta">Afspraak Maken</a>
+  <a href="booking.html" class="nav-cta">Afspraak Maken</a>
 </nav>
 
 <!-- ═══ HERO ═══ -->
@@ -1213,7 +1224,7 @@ footer::before {
         <li><a href="index.html">Home</a></li>
         <li><a href="history.html">History</a></li>
         <li><a href="services.html">Services</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html">Contact</a></li>
       </ul>
     </div>
 
