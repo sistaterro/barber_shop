@@ -1,56 +1,55 @@
 # Lighttown Barbershop
 
-Sitio web estático de Lighttown Barbershop, una barbería ubicada en Eindhoven. El diseño combina una estética clásica y oscura con detalles dorados, tipografía serif y elementos ornamentales.
+Static website for Lighttown Barbershop, a barbershop located in Eindhoven. Its design combines a classic dark aesthetic with gold accents, serif typography, and ornamental details.
 
-## Páginas
+## Pages
 
-- `index.html`: página de inicio
-- `history.html`: historia de la barbería y del oficio
-- `services.html`: servicios y precios
-- `contact.html`: contacto, horarios, reservas y mapa
-- `assets/`: logotipos, fotografías e imágenes del sitio
+- `index.html`: home page
+- `history.html`: history of the barbershop and the trade
+- `services.html`: services and pricing
+- `contact.html`: contact details, opening hours, booking, and map
+- `assets/`: logos, photographs, and other site images
 
-## Ejecutar localmente
+## Running Locally
 
-El proyecto usa HTML, CSS y JavaScript puro. No necesita instalación, dependencias ni proceso de compilación.
+The project uses plain HTML, CSS, and JavaScript. It does not require installation, dependencies, or a build process.
 
-Podés abrir `index.html` directamente en el navegador. Para probarlo mediante un servidor local, desde la carpeta del proyecto ejecutá:
+You can open `index.html` directly in a browser. To test it through a local server, run the following command from the project directory:
 
 ```powershell
 python -m http.server 8000
 ```
 
-Después visitá `http://localhost:8000`.
+Then visit `http://localhost:8000`.
 
-## Datos del negocio
+## Business Details
 
-- Dirección: Leenderweg 80-b, 5615 AB Eindhoven
-- Teléfono y WhatsApp: +31 6 138 77 236
+- Address: Leenderweg 80-b, 5615 AB Eindhoven
+- Phone and WhatsApp: +31 6 138 77 236
 - Email: info@lighttown-barbershop.nl
 - Instagram: [@lighttownbarbershop](https://www.instagram.com/lighttownbarbershop?igsh=MXQyZ3ZpamFlamZxYg%3D%3D)
 
-### Horarios
+### Opening Hours
 
-| Día | Horario |
+| Day | Hours |
 |---|---|
-| Lunes | Cerrado |
-| Martes a viernes | 10:00–19:00 |
-| Sábado | 09:00–17:00 |
-| Domingo | Cerrado |
+| Monday | Closed |
+| Tuesday to Friday | 10:00–19:00 |
+| Saturday | 09:00–17:00 |
+| Sunday | Closed |
 
-## Mantenimiento
+## Maintenance
 
-Al modificar el sitio:
+When updating the site:
 
-- Conservá el menú `Home`, `History`, `Services` y `Contact` en todas las páginas.
-- Dirigí las llamadas a contacto o reserva hacia `contact.html`, salvo los enlaces directos de WhatsApp.
-- Mantené sincronizados la dirección, los horarios y los datos de contacto en todas las páginas.
-- Verificá la navegación y la legibilidad tanto en escritorio como en móvil.
-- No introduzcas frameworks o herramientas de compilación sin una necesidad concreta.
+- Keep the `Home`, `History`, `Services`, and `Contact` menu on every page.
+- Point contact and booking calls to action to `contact.html`, except for direct WhatsApp links.
+- Keep the address, opening hours, and contact details synchronized across all pages.
+- Verify navigation and readability on both desktop and mobile.
+- Do not introduce frameworks or build tools without a concrete need.
 
-## Recursos principales
+## Main Assets
 
-- Logo de navegación y pie: `assets/logo.png`
-- Favicon: `assets/logoico.png`
-- Logo principal del hero: `assets/main logo.png`
-
+- Navigation and footer logo: `assets/logo.png`
+- Favicon and app icon: `assets/logoico.png`
+- Main hero logo: `assets/main logo.png`
