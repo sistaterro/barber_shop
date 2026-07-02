@@ -1,5 +1,45 @@
 {
   "schemaVersion": 1,
+  "openingHours": [
+    {
+      "day": "Maandag",
+      "open": false
+    },
+    {
+      "day": "Dinsdag",
+      "open": true,
+      "opens": "10:00",
+      "closes": "19:00"
+    },
+    {
+      "day": "Woensdag",
+      "open": true,
+      "opens": "10:00",
+      "closes": "19:00"
+    },
+    {
+      "day": "Donderdag",
+      "open": true,
+      "opens": "10:00",
+      "closes": "19:00"
+    },
+    {
+      "day": "Vrijdag",
+      "open": true,
+      "opens": "10:00",
+      "closes": "19:00"
+    },
+    {
+      "day": "Zaterdag",
+      "open": true,
+      "opens": "10:00",
+      "closes": "17:00"
+    },
+    {
+      "day": "Zondag",
+      "open": false
+    }
+  ],
   "currency": "EUR",
   "categories": [
     {
